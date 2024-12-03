@@ -1,20 +1,14 @@
 // Imports & destructures the Router function
 const { Router } = require("express");
 
+const controller = require("../controllers/controllers");
+
 // Create instance of the Express router
 const indexRouter = Router();
 
 // Main GET index route
-indexRouter.get("/", (req, res) => {
-  res.render("index.ejs");
-});
-
-indexRouter.get("/join", (req, res) => {
-  res.render("join.ejs");
-});
-
-indexRouter.post("/join", (req, res) => {
-    
-})
+indexRouter.get("/", controller.getHomePage);
+indexRouter.get("/sign-up", controller.getSignUpForm);
+indexRouter.post("/sign-up", controller.addUser);
 
 module.exports = indexRouter;

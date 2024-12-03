@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/sign-up" method="GET">
+    <form action="/sign-up" method="POST">
       <label for="firstName">First name</label>
       <input type="text" id="firstName" name="firstName" />
       <label for="lastName" id="lastName" name="lastName">Last name</label>
@@ -16,7 +16,8 @@
       <label for="password">Password</label>
       <input type="password" id="password" name="password" />
       <label for="repeatPassword">Repeat Password</label>
-      <input type="password" />
+      <input type="password" id="repeatPassword" name="repeatPassword" />
+      <button type="submit"></button>
     </form>
   </body>
 </html>
