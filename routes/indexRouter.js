@@ -9,4 +9,12 @@ indexRouter.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
+indexRouter.get("/join", (req, res) => {
+  res.render("join.ejs");
+});
+
+indexRouter.post("/join", (req, res) => {
+    
+})
+
 module.exports = indexRouter;
