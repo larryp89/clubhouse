@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "type": "text",
+      "version": 355,
+      "versionNonce": 1898135631,
+      "isDeleted": false,
+      "id": "dWZhB_3RRVN2q0eIJvUrL",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 297,
+      "y": 132,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "width": 328.125,
+      "height": 360,
+      "seed": 1791178901,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1733226664592,
+      "link": null,
+      "locked": false,
+      "fontSize": 20,
+      "fontFamily": 3,
+      "text": "Database tables:\n- users\n    - id\n    - first_name\n    - last_name\n    - username (email)\n    - password\n    - is_member\n\n- messages\n    - id\n    - message_title\n    - message_body\n    - userID (from users id)\n    - created_at",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Database tables:\n- users\n    - id\n    - first_name\n    - last_name\n    - username (email)\n    - password\n    - is_member\n\n- messages\n    - id\n    - message_title\n    - message_body\n    - userID (from users id)\n    - created_at",
+      "lineHeight": 1.2,
+      "baseline": 355
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
