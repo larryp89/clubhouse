@@ -2,6 +2,7 @@
 const { Router } = require("express");
 const controller = require("../controllers/controllers");
 const validateUser = require("../validators/validateUser");
+const validateMember = require("../validators/validateMember");
 const passport = require("passport");
 
 // Create instance of the Express router
@@ -32,5 +33,6 @@ router.get("/sign-up", controller.getSignUpForm); // GET sign up form
 router.post("/sign-up", validateUser, controller.addUser); // POST sign up form
 
 router.get("/messages", controller.getMessages);
+router.get("/verify", controller.getVerifyForm);
 
 module.exports = router;

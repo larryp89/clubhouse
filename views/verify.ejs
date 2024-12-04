@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../public/script.js" defer></script>
+  </head>
+  <body>
+    <h1>Complete the riddle to get verified</h1>
+    <p>
+      I'm not alive, but I can grow; I don't have lungs, but I need air; I don't
+      have a mouth, but I can drown. What am I?
+    </p>
+    <form action="/verify" method="POST">
+      <label for="riddleAnswer">Your Answer:</label>
+      <input type="text" id="riddleAnswer" name="riddleAnswer" required />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

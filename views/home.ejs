@@ -7,8 +7,14 @@
   </head>
   <body>
     <h1>Welcome to ClubHouse</h1>
-    <% if (locals.user) { %>
-    <h1>WELCOME BACK <%= user.username %></h1>
+    <% if (currentUser) { %>
+    <h1>WELCOME BACK <%= currentUser.first_name %></h1>
+    <% if (currentUser.is_member) { %>
+    <h1>You're a member!</h1>
+    <% } else { %>
+    <h2>You are not a member</h2>
+    <a href="/verify">Verify membership</a>
+    <% } %>
     <a href="/messages">Go to message board</a>
     <form action="/logout" method="POST">
       <button type="submit">Logout</button>

@@ -3,7 +3,7 @@ const { hashPassword } = require("../utils/hashPassword");
 const db = require("../db/queries");
 
 function getHomePage(req, res) {
-  res.render("home", { user: req.user }); // If logged in, req.user is true
+  res.render("home"); // If logged in, req.user is true
 }
 
 function getSignUpForm(req, res) {
@@ -12,6 +12,14 @@ function getSignUpForm(req, res) {
 
 function getLoginForm(req, res) {
   res.render("login.ejs");
+}
+
+function getVerifyForm(req, res) {
+  res.render("verify");
+}
+
+function verifyMember(req, res) {
+  res.send();
 }
 
 function getMessages(req, res) {
@@ -42,4 +50,5 @@ module.exports = {
   getLoginForm,
   addUser,
   getMessages,
+  getVerifyForm,
 };
