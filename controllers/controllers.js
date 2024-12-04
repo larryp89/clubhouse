@@ -15,14 +15,10 @@ async function addUser(req, res) {
     console.log(errors);
   } else {
     const { firstName, lastName, email, password, repeatPassword } = req.body;
-    if (password !== repeatPassword) {
-      console.log("Passwords do not match");
-    } else {
-      const hashedPassword = await hashPassword(password);
-      console.log(hashedPassword);
-    }
+    const hashedPassword = await hashPassword(password);
+    console.log(hashedPassword);
+    res.redirect("/");
   }
-  res.redirect("/");
 }
 
 module.exports = {

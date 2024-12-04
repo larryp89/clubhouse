@@ -33,6 +33,13 @@ const validateUser = [
     .withMessage("Must contain a digit")
     .matches(/[@$!%*?&#]/)
     .withMessage("Must contain a special character"),
+
+  body("repeatPassword").custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error("Passwords do not match");
+    }
+    return true;
+  }),
 ];
 
 module.exports = validateUser;
