@@ -1,4 +1,25 @@
 TODO Validate forms
 TODO Add password hashing
-TODO Add authentication
+TODO Add authentication using password - Create a login page & authneticate
 TODO Write queries for database
+
+Notes
+
+- On get("/") user
+
+  - If user is logged in
+
+    - Welcome back
+    - If user has obtained secret key:
+
+      - go to message board
+
+    - If user has not obtained secret key:
+
+      - get secret key
+
+    - logout
+
+  - If user is ont logged in:
+    - login
+    - sign up
