@@ -1,5 +1,6 @@
-const { body, validationResult } = require("express-validator");
-[
+const { body } = require("express-validator");
+
+const validateUser = [
   body("firstName")
     .trim()
     .notEmpty()
@@ -33,3 +34,5 @@ const { body, validationResult } = require("express-validator");
     .matches(/[@$!%*?&#]/)
     .withMessage("Must contain a special character"),
 ];
+
+module.exports = validateUser;

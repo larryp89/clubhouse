@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator");
+
 function getHomePage(req, res) {
   res.render("home");
 }
@@ -7,7 +9,14 @@ function getSignUpForm(req, res) {
 }
 
 function addUser(req, res) {
-  const { firstName, lastName, email, password, repeatPassword } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+  } else {
+    const { firstName, lastName, email, password, repeatPassword } = req.body;
+    console.log(req.body);
+  }
+
   res.redirect("/");
 }
 
