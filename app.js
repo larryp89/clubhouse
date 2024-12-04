@@ -19,10 +19,10 @@ app.set("views", path.join(__dirname, "views")); // Tells Express to look for te
 app.set("view engine", "ejs"); // Sets EJS as the templating engine, allowing you to render EJS templates with the res.render method
 
 // Get routes from routers
-const indexRouter = require("./routes/indexRouter");
+const router = require("./routes/router");
 
 // Mount the indexRouter middleware at the root path ("/"), i.e. any paths handled by the corresponding route handlers
-app.use("/", indexRouter);
+app.use("/", router);
 
 // NB process accessible on global object so don't need to require
 const PORT = process.env.PORT || 3000;
