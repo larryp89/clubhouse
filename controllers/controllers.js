@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { hashPassword } = require("../utils/hashPassword");
 const db = require("../db/queries");
+const pool = require("../db/pool");
 
 function getHomePage(req, res) {
   res.render("home"); // If logged in, req.user is true
@@ -18,8 +19,15 @@ function getVerifyForm(req, res) {
   res.render("verify");
 }
 
-function verifyMember(req, res) {
-  res.send();
+async function verifyMember(req, res) {
+  console.log("...verifying member");
+  const userID = req.user.id;
+  try {
+    await db.updateMembershipStatus(userID);
+    res.status(200);
+  } catch (err) {
+    res.status(401);
+  }
 }
 
 function getMessages(req, res) {
@@ -51,4 +59,5 @@ module.exports = {
   addUser,
   getMessages,
   getVerifyForm,
+  verifyMember,
 };

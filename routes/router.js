@@ -31,8 +31,8 @@ router.post("/logout", (req, res, next) => {
 
 router.get("/sign-up", controller.getSignUpForm); // GET sign up form
 router.post("/sign-up", validateUser, controller.addUser); // POST sign up form
-
 router.get("/messages", controller.getMessages);
 router.get("/verify", controller.getVerifyForm);
+router.post("/verify", controller.verifyMember);
 
 module.exports = router;
