@@ -27,7 +27,11 @@
       <!-- Admin Controls -->
       <% if (currentUser && currentUser.is_admin) { %>
       <form action="/delete-post" method="POST">
-        <input type="hidden" name="messageID" value="<%= message.id %>" />
+        <input
+          type="hidden"
+          name="messageID"
+          value="<%= message.message_id %>"
+        />
         <button type="submit">Delete</button>
       </form>
       <% } %>

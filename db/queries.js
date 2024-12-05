@@ -29,7 +29,7 @@ async function addMessage(userID, messageTitle, messageBody) {
 // Get all messages
 async function getMessages() {
   console.log("GETTING ALL MESSAGES WITH USER NAME QUERY");
-  const getMessagesQuery = `SELECT users.first_name, users.last_name, users.email, messages.message_title, messages.message_body, messages.message_time 
+  const getMessagesQuery = `SELECT users.first_name, users.last_name, users.email, messages.message_title, messages.message_body, messages.message_time, messages.id as message_id 
   FROM users 
   RIGHT JOIN messages ON users.id = messages.user_id `;
   try {
@@ -52,4 +52,21 @@ async function updateMembershipStatus(userID) {
   }
 }
 
-module.exports = { addUser, updateMembershipStatus, addMessage, getMessages };
+// Delete post
+async function deletePost(messageID) {
+  const deleteQuery = `DELETE FROM messages WHERE messages.id = $1`;
+  const deleteValue = [messageID];
+  try {
+    await pool.query(deleteQuery, deleteValue);
+  } catch (err) {
+    console.log("Error deletting from DB", err);
+  }
+}
+
+module.exports = {
+  addUser,
+  updateMembershipStatus,
+  addMessage,
+  getMessages,
+  deletePost,
+};

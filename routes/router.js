@@ -35,6 +35,7 @@ router.get("/messages", controller.getMessages);
 router.get("/verify", controller.getVerifyForm);
 router.post("/verify", controller.verifyMember);
 router.post("/add-message", controller.addMessage);
+router.post("/delete-post", controller.deletePost);
 router.get("*", (req, res) => res.send("Oops, this page does not exist"));
 
 module.exports = router;

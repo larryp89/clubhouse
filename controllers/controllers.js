@@ -69,6 +69,14 @@ async function addUser(req, res) {
   }
 }
 
+async function deletePost(req, res) {
+  console.log("...deleting post");
+  const messageID = req.body.messageID;
+  await db.deletePost(messageID);
+  console.log("post deleted");
+  res.redirect("/messages");
+}
+
 module.exports = {
   getHomePage,
   getSignUpForm,
@@ -78,4 +86,5 @@ module.exports = {
   getVerifyForm,
   verifyMember,
   addMessage,
+  deletePost,
 };
