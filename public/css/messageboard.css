@@ -6,11 +6,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   flex-direction: column;
 }
 
 .message-container {
+  margin: 2rem;
   text-align: center;
   background-color: white;
   padding: 20px;
@@ -62,7 +63,14 @@ input {
 
 /* Message styling */
 .message {
+  padding: 1rem;
   background-color: grey;
+  margin: 1rem;
+}
+.message h2 {
+  margin-bottom: 0;
 }
 
-
+.message p {
+  margin-top: 0.5rem;
+}

@@ -29,7 +29,8 @@ async function addMessage(userID, messageTitle, messageBody) {
 // Get all messages
 async function getMessages() {
   console.log("GETTING ALL MESSAGES WITH USER NAME QUERY");
-  const getMessagesQuery = `SELECT users.first_name, users.last_name, users.email, messages.message_title, messages.message_body, messages.message_time, messages.id as message_id 
+  const getMessagesQuery = `SELECT users.first_name, users.last_name, users.email, messages.message_title, messages.message_body, 
+  TO_CHAR(messages.message_time, 'DD/MM/YYYY') AS formatted_date, messages.id as message_id 
   FROM users 
   RIGHT JOIN messages ON users.id = messages.user_id `;
   try {
