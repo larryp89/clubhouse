@@ -31,7 +31,7 @@ async function getMessages() {
   console.log("GETTING ALL MESSAGES WITH USER NAME QUERY");
   const getMessagesQuery = `SELECT users.first_name, users.last_name, users.email, messages.message_title, messages.message_body, messages.message_time 
   FROM users 
-  LEFT JOIN messages ON users.id = messages.user_id `;
+  RIGHT JOIN messages ON users.id = messages.user_id `;
   try {
     const messages = await pool.query(getMessagesQuery);
     return messages;
@@ -47,7 +47,6 @@ async function updateMembershipStatus(userID) {
   const updateData = [userID];
   try {
     await pool.query(updateQuery, updateData);
-    return true;
   } catch (err) {
     console.log("Error updating user", err);
   }
