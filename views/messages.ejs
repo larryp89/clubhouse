@@ -23,7 +23,7 @@
       </div>
 
       <h1>Message Board</h1>
-
+      <h2>Only verified members can see post details</h2>
       <!-- Show messages  -->
       <% if(messages.length === 0) { %>
       <h2>Nothing to see here!</h2>
@@ -55,7 +55,7 @@
 
         <!-- Admin Controls -->
         <% if (currentUser && currentUser.is_admin) { %>
-        <form action="/delete-post" method="POST">
+        <form action="/delete-post" method="POST" class="add-message">
           <input
             type="hidden"
             name="messageID"
@@ -72,7 +72,7 @@
     <% if (currentUser) { %>
     <h2>Add a message</h2>
     <%- include('partials/errors') %>
-    <form action="/add-message" method="POST">
+    <form action="/add-message" method="POST" class="add-message-form">
       <div>
         <label for="messageTitle">Title</label>
         <input type="text" id="messageTitle" name="messageTitle" />
