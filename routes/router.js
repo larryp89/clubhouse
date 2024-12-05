@@ -2,8 +2,8 @@
 const { Router } = require("express");
 const controller = require("../controllers/controllers");
 const validateUser = require("../validators/validateUser");
-const validateMember = require("../validators/validateMember");
 const passport = require("passport");
+const isAuth = require("../middleware/authMiddleware");
 
 // Create instance of the Express router
 const router = Router();

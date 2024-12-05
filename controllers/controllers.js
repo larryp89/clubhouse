@@ -24,14 +24,18 @@ async function verifyMember(req, res) {
   const userID = req.user.id;
   try {
     await db.updateMembershipStatus(userID);
-    res.status(200);
+    console.log("SUCCES");
+    res.status(200).send(); // This sends the response back tot he fetch API
   } catch (err) {
     res.status(401);
   }
 }
 
-function getMessages(req, res) {
-  res.render("messages.ejs");
+async function getMessages(req, res) {
+  const allMessages = await db.getMessages();
+  const messages = allMessages.rows;
+  console.log(messages);
+  res.render("messages.ejs", { messages: messages });
 }
 
 async function addMessage(req, res) {
@@ -41,7 +45,7 @@ async function addMessage(req, res) {
   console.log(messageBody, messageTitle, userID);
   try {
     await db.addMessage(userID, messageTitle, messageBody);
-    res.status(200);
+    res.status(200).redirect("/messages");
   } catch (err) {
     res.status(401);
   }

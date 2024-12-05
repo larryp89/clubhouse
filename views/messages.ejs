@@ -6,8 +6,22 @@
     <title>Document</title>
   </head>
   <body>
+    <a href="/">Home</a>
     <h1>MESSAGES: I LIKE PURPLE</h1>
-    <% if (currentUser.is_member) { %>
+    <% for( let message of messages ) { %> <% if (!currentUser ||
+    !currentUser.is_member) { %>
+    <h3>Anonymous user</h3>
+    <h3><%= message.message_title %></h3>
+    <h3><%= message.message_body %></h3>
+    <h4><%= message.message_time %></h4>
+
+    <% } else { %>
+    <h3><%= message.first_name %> <%= message.last_name %></h3>
+    <h3><%= message.email %></h3>
+    <h3><%= message.message_title %></h3>
+    <h3><%= message.message_body %></h3>
+    <h4><%= message.message_time %></h4>
+    <% } %> <% } %> <% if (currentUser) { %>
     <h2>Add a message</h2>
     <form action="/add-message" method="POST">
       <label for="messageTitle">Title</label>
