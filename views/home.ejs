@@ -4,24 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/home.css" />
   </head>
   <body>
-    <h1>Welcome to ClubHouse</h1>
-    <% if (currentUser) { %>
-    <h1>WELCOME BACK <%= currentUser.first_name%></h1>
-    <% if (currentUser.is_member) { %>
-    <h1>You're a member!</h1>
-    <% } else { %>
-    <h2>You are not a member</h2>
-    <a href="/verify">Verify membership</a>
-    <% } %>
-    <a href="/messages">Go to message board</a>
-    <form action="/logout" method="POST">
-      <button type="submit">Logout</button>
-    </form>
-    <% } else { %>
-    <a href="/login">Login</a>
-    <a href="/sign-up">Sign up</a>
-    <% } %>
+    <div class="home-container">
+      <h1>Welcome to ClubHouse</h1>
+      <% if (currentUser) { %>
+      <h3>Welcome back, <%= currentUser.first_name %></h3>
+      <% if (currentUser.is_member) { %>
+      <h3>
+        Your membership has been verified!. You have unrestricted access to the
+        message board.
+      </h3>
+      <% } else { %>
+      <h2>You are not a member</h2>
+      <a href="/verify">Verify membership</a> <% } %>
+      <a href="/messages">Go to message board</a>
+      <form action="/logout" method="POST" style="display: inline">
+        <button type="submit">Logout</button>
+      </form>
+      <% } else { %> <a href="/login">Login</a> <a href="/sign-up">Sign up</a>
+      <a href="/messages">Message board</a> <% } %>
+    </div>
   </body>
 </html>

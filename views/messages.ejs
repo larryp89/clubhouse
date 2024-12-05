@@ -4,56 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Messages Board</title>
+    <link rel="stylesheet" href="css/messageboard.css" />
   </head>
   <body>
-    <a href="/">Home</a>
-    <h1>MESSAGES: I LIKE PURPLE</h1>
+    <div class="message-container">
+      <div class="links">
+        <!-- Show specific links depending on status -->
+        <a href="/">Home</a>
+        <% if (!currentUser) { %>
+        <a href="/sign-up">Sign up to Clubhouse</a>
+        <% } else if (currentUser && !currentUser.is_member) { %>
+        <a href="/verify">Get verified</a>
+        <% } else { %>
+        <form action="/logout" method="POST">
+          <button>Logout</button>
+        </form>
+        <% } %>
+      </div>
 
-    <!-- Messages Display Section -->
-    <% for (let message of messages) { %>
-    <div class="message">
-      <!-- Author Information -->
-      <% if (!currentUser || !currentUser.is_member) { %>
-      <h3>Anonymous user</h3>
-      <% } else { %>
-      <h3><%= message.first_name %> <%= message.last_name %></h3>
-      <span><%= message.message_time %></span>
+      <h1>Message Board</h1>
+
+      <!-- Show messages  -->
+      <% if(messages.length === 0) { %>
+      <h2>Nothing to see here!</h2>
+      <h3>Post a message and get this party started!</h3>
       <% } %>
 
-      <!-- Message Content -->
-      <h3><%= message.message_title %></h3>
-      <h3><%= message.message_body %></h3>
+      <!-- Messages Display Section -->
+      <% for (let message of messages) { %>
+      <div class="message">
+        <!-- Message Content -->
+        <h2><%= message.message_title %></h2>
+        <p><%= message.message_body %></p>
 
-      <!-- Admin Controls -->
-      <% if (currentUser && currentUser.is_admin) { %>
-      <form action="/delete-post" method="POST">
-        <input
-          type="hidden"
-          name="messageID"
-          value="<%= message.message_id %>"
-        />
-        <button type="submit">Delete</button>
-      </form>
+        <!-- Author Information -->
+        <% if (!currentUser || !currentUser.is_member) { %>
+        <p>Posted by: <span>Anonymous</span></p>
+        <p>Posted on: <span>Unknown</span></p>
+
+        <% } else { %>
+        <p>
+          Posted by:
+          <span
+            ><%= message.first_name %> <%= message.last_name %> on <%=
+            message.message_time %></span
+          >
+        </p>
+
+        <% } %>
+
+        <!-- Admin Controls -->
+        <% if (currentUser && currentUser.is_admin) { %>
+        <form action="/delete-post" method="POST">
+          <input
+            type="hidden"
+            name="messageID"
+            value="<%= message.message_id %>"
+          />
+          <button type="submit" class="delete-button">Delete</button>
+        </form>
+        <% } %>
+      </div>
       <% } %>
     </div>
-    <% } %>
 
     <!-- Message Form Section -->
     <% if (currentUser) { %>
     <h2>Add a message</h2>
+    <%- include('partials/errors') %>
     <form action="/add-message" method="POST">
       <div>
         <label for="messageTitle">Title</label>
-        <input type="text" id="messageTitle" name="messageTitle" required />
+        <input type="text" id="messageTitle" name="messageTitle" />
       </div>
       <div>
         <label for="messageBody">Message</label>
-        <textarea id="messageBody" name="messageBody" required></textarea>
+        <textarea id="messageBody" name="messageBody"></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
     <% } else { %>
-    <h2>You can't post any messages until you are verified!</h2>
+    <h2>You can't post any messages until you are signed in and verified!</h2>
     <% } %>
   </body>
 </html>

@@ -35,19 +35,26 @@ async function getMessages(req, res) {
   const allMessages = await db.getMessages();
   const messages = allMessages.rows;
   console.log(messages);
-  res.render("messages.ejs", { messages: messages });
+  res.render("messages.ejs", { messages: messages, errors: [] });
 }
 
 async function addMessage(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const allMessages = await db.getMessages();
+    const messages = allMessages.rows;
+    console.log(messages);
+    res.render("messages.ejs", { messages: messages, errors: errors.array() });
+  }
+
   console.log("...adding message to DB");
   const { messageTitle, messageBody } = req.body;
   const userID = req.user.id;
-  console.log(messageBody, messageTitle, userID);
   try {
     await db.addMessage(userID, messageTitle, messageBody);
     res.status(200).redirect("/messages");
   } catch (err) {
-    res.status(401);
+    res;
   }
 }
 

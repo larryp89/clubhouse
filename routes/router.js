@@ -2,13 +2,11 @@
 const { Router } = require("express");
 const controller = require("../controllers/controllers");
 const validateUser = require("../validators/validateUser");
+const validateMessage = require("../validators/validateMessage");
 const passport = require("passport");
-const isAuth = require("../middleware/authMiddleware");
-
-// Create instance of the Express router
 const router = Router();
 
-// GET routes
+// Routes
 router.get("/", controller.getHomePage);
 router.get("/login", controller.getLoginForm);
 
@@ -34,7 +32,7 @@ router.post("/sign-up", validateUser, controller.addUser); // POST sign up form
 router.get("/messages", controller.getMessages);
 router.get("/verify", controller.getVerifyForm);
 router.post("/verify", controller.verifyMember);
-router.post("/add-message", controller.addMessage);
+router.post("/add-message", validateMessage, controller.addMessage);
 router.post("/delete-post", controller.deletePost);
 router.get("*", (req, res) => res.send("Oops, this page does not exist"));
 
