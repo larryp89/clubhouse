@@ -34,6 +34,19 @@ function getMessages(req, res) {
   res.render("messages.ejs");
 }
 
+async function addMessage(req, res) {
+  console.log("...adding message to DB");
+  const { messageTitle, messageBody } = req.body;
+  const userID = req.user.id;
+  console.log(messageBody, messageTitle, userID);
+  try {
+    await db.addMessage(userID, messageTitle, messageBody);
+    res.status(200);
+  } catch (err) {
+    res.status(401);
+  }
+}
+
 async function addUser(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -60,4 +73,5 @@ module.exports = {
   getMessages,
   getVerifyForm,
   verifyMember,
+  addMessage,
 };

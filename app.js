@@ -1,15 +1,10 @@
-// Import express module into the project
 const express = require("express");
-// Create an instance of the express application (used to define routes, middleware, and app-specific settings)
 const app = express();
-
-// Import the path module from node (provides utilities for working with file/directory paths)
 const path = require("node:path");
-
-// Import sesssions from passport
 const session = require("express-session");
-
 const passport = require("./config/passport");
+const pgSession = require("connect-pg-simple")(session); // Allows maintaining a session with the db
+const pool = require("./db/pool");
 
 // Configure the app to use EJS and specify the directory for EJS templates
 app.set("views", path.join(__dirname, "views")); // Tells Express to look for template files in the views directory.
@@ -23,10 +18,21 @@ const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
 // Set up session, which happens on every route request
-app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(
+  session({
+    store: new pgSession({
+      pool: pool,
+      tableName: "session", // Optional: Specify a table name
+    }),
+    secret: "cats",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+  })
+);
 app.use(passport.session());
 
-// Give access to local variables
+// Allows the currently authenticated user to be accessible in views as currentUser rather than passing in {} to each contoller/view
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();

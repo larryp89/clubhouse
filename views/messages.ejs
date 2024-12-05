@@ -9,11 +9,12 @@
     <h1>MESSAGES: I LIKE PURPLE</h1>
     <% if (currentUser.is_member) { %>
     <h2>Add a message</h2>
-    <form>
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" />
-      <label for="message">Message</label>
-      <input type="text" id="message" name="message" />
+    <form action="/add-message" method="POST">
+      <label for="messageTitle">Title</label>
+      <input type="text" id="messageTitle" name="messageTitle" />
+      <label for="messageBody">Message</label>
+      <textarea type="text" id="messageBody" name="messageBody"></textarea>
+      <button>Submit</button>
     </form>
     <% } else { %>
     <h2>You can't post any messages until you are verified!</h2>

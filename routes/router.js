@@ -34,5 +34,6 @@ router.post("/sign-up", validateUser, controller.addUser); // POST sign up form
 router.get("/messages", controller.getMessages);
 router.get("/verify", controller.getVerifyForm);
 router.post("/verify", controller.verifyMember);
+router.post("/add-message", controller.addMessage);
 
 module.exports = router;

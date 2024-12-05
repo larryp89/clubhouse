@@ -13,6 +13,19 @@ async function addUser(firstName, lastName, email, password) {
   }
 }
 
+// Add message
+async function addMessage(userID, messageTitle, messageBody) {
+  console.log("RUNNING ADD MESSAGE QUERY");
+  const addMessageQuery =
+    "INSERT INTO messages (message_title, message_body, user_id) VALUES ($1, $2, $3)";
+  const addMessageData = [messageTitle, messageBody, userID];
+  try {
+    await pool.query(addMessageQuery, addMessageData);
+  } catch (err) {
+    console.log("Error adding message", err);
+  }
+}
+
 // Update membership status
 async function updateMembershipStatus(userID) {
   console.log("...UPDATING MEMBERSHIP STATUS");
@@ -25,4 +38,4 @@ async function updateMembershipStatus(userID) {
   }
 }
 
-module.exports = { addUser, updateMembershipStatus };
+module.exports = { addUser, updateMembershipStatus, addMessage };
