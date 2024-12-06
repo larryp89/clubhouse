@@ -60,7 +60,9 @@ async function main() {
       rejectUnauthorized: false,
     },
   });
+  console.log("...CONNECTING TO DB");
   await client.connect();
+  console.log("CONNECTION ESTABLISHED");
   await client.query(SQL); // Create the tables if one doesn't exist
   console.log("...tables created");
   await initializeDatabase();
