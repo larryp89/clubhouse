@@ -56,6 +56,9 @@ async function main() {
 
   const client = new Client({
     connectionString,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
   await client.connect();
   await client.query(SQL); // Create the tables if one doesn't exist
