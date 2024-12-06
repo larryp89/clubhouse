@@ -3,3 +3,4 @@ TODO Add password hashing
 TODO Add authentication using password - Create a login page & authneticate
 TODO Write queries for database
 TODO modify db secret
+TODO add errors for sign-up route

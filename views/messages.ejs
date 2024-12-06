@@ -73,14 +73,10 @@
     <h2>Add a message</h2>
     <%- include('partials/errors') %>
     <form action="/add-message" method="POST" class="add-message-form">
-      <div>
-        <label for="messageTitle">Title</label>
-        <input type="text" id="messageTitle" name="messageTitle" />
-      </div>
-      <div>
-        <label for="messageBody">Message</label>
-        <textarea id="messageBody" name="messageBody"></textarea>
-      </div>
+      <label for="messageTitle">Title</label>
+      <input type="text" id="messageTitle" name="messageTitle" />
+      <label for="messageBody">Message</label>
+      <textarea id="messageBody" name="messageBody"></textarea>
       <button type="submit">Submit</button>
     </form>
     <% } else { %>
