@@ -8,7 +8,7 @@ function getHomePage(req, res) {
 }
 
 function getSignUpForm(req, res) {
-  res.render("sign-up.ejs");
+  res.render("sign-up.ejs", { errors: [] });
 }
 
 function getLoginForm(req, res) {
@@ -43,8 +43,10 @@ async function addMessage(req, res) {
   if (!errors.isEmpty()) {
     const allMessages = await db.getMessages();
     const messages = allMessages.rows;
-    console.log(messages);
-    res.render("messages.ejs", { messages: messages, errors: errors.array() });
+    return res.render("messages.ejs", {
+      messages: messages,
+      errors: errors.array(),
+    });
   }
 
   console.log("...adding message to DB");
@@ -61,7 +63,7 @@ async function addMessage(req, res) {
 async function addUser(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
+    return res.render("sign-up.ejs", { errors: errors.array() });
   } else {
     try {
       console.log("...adding to DB");
