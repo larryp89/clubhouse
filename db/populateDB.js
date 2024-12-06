@@ -1,4 +1,6 @@
 require("dotenv").config();
+const bcrypt = require("bcryptjs");
+const pool = require("./pool.js");
 
 // Client class runs SQL commands (ideal for scripts that perform a series of db operations and then exits, e.g. initial setup/seeding scripts).
 const { Client } = require("pg");
@@ -22,19 +24,45 @@ message_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );`;
 
+const initializeDatabase = async () => {
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  const hashedPassword = await bcrypt.hash(adminPassword, 10);
+  const checkAdminQuery = `SELECT * FROM users WHERE email = $1`;
+  const createAdminQuery = `INSERT INTO users (first_name, last_name, email, password, is_member, is_admin) VALUES ($1, $2, $3, $4, $5, $6)`;
+  try {
+    const res = await pool.query(checkAdminQuery, [adminEmail]);
+    if (res.rows.length === 0) {
+      await pool.query(createAdminQuery, [
+        "Admin",
+        "Admin",
+        adminEmail,
+        hashedPassword,
+        true,
+        true,
+      ]);
+      console.log("Admin user created");
+    } else {
+      console.log("Admin user already exists");
+    }
+  } catch (err) {
+    console.error("Error initializing database:", err);
+  }
+};
+
 async function main() {
   console.log("...creating tables");
-  const connectionString =
-    process.argv[2] ||
-    `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+  const connectionString = process.argv[2] || process.env.DATABASE_URL;
 
   const client = new Client({
     connectionString,
   });
   await client.connect();
   await client.query(SQL); // Create the tables if one doesn't exist
-  await client.end();
   console.log("...tables created");
+  await initializeDatabase();
+  console.log("Admin created");
+  await client.end();
 }
 
 main();

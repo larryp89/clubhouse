@@ -34,7 +34,6 @@ async function verifyMember(req, res) {
 async function getMessages(req, res) {
   const allMessages = await db.getMessages();
   const messages = allMessages.rows;
-  console.log(messages);
   res.render("messages.ejs", { messages: messages, errors: [] });
 }
 

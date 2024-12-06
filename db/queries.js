@@ -37,7 +37,7 @@ async function getMessages() {
     const messages = await pool.query(getMessagesQuery);
     return messages;
   } catch (err) {
-    console.log("Error adding message", err);
+    console.log("Error retrieving message", err);
   }
 }
 
