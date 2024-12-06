@@ -24,6 +24,7 @@
 
       <h1>Message Board</h1>
       <h2>Only verified members can see post details</h2>
+      <h2>Onlu members can post messages.</h2>
       <!-- Show messages  -->
       <% if(messages.length === 0) { %>
       <h2>Nothing to see here!</h2>
@@ -79,8 +80,6 @@
       <textarea id="messageBody" name="messageBody"></textarea>
       <button type="submit">Submit</button>
     </form>
-    <% } else { %>
-    <h2>You can't post any messages until you are signed in and verified!</h2>
-    <% } %>
+    <% } else { %> <% } %>
   </body>
 </html>

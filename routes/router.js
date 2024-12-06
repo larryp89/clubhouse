@@ -3,6 +3,7 @@ const { Router } = require("express");
 const controller = require("../controllers/controllers");
 const validateUser = require("../validators/validateUser");
 const validateMessage = require("../validators/validateMessage");
+const validateLogin = require("../validators/validateLogin");
 const passport = require("passport");
 const router = Router();
 
@@ -17,6 +18,7 @@ router.post(
     failureRedirect: "/login",
   })
 );
+
 router.post("/logout", (req, res, next) => {
   // Passport adds a logout property to the req object
   req.logout((err) => {

@@ -14,7 +14,7 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  background-color: #1f1f1f;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -24,7 +24,7 @@ form {
 
 form label {
   margin-bottom: 5px;
-  color: #ffcc00; /* Bright yellow for labels */
+  color: black;
 }
 
 form input {
@@ -32,8 +32,6 @@ form input {
   padding: 10px;
   border: 1px solid #333;
   border-radius: 5px;
-  background-color: #2c2c2c;
-  color: #ffffff;
 }
 
 form button {
@@ -49,4 +47,8 @@ form button {
 form button:hover {
   background-color: #e6b800;
   transform: scale(1.05);
+}
+
+form a {
+  margin-top: 1rem;
 }
