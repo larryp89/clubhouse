@@ -23,7 +23,7 @@ h1 {
   font-size: 4.5rem;
 }
 
-h4{
+h4 {
   font-style: italic;
 }
 
@@ -46,4 +46,9 @@ button:hover {
 
 button {
   cursor: pointer;
+}
+
+#c-letter {
+  font-style: italic;
+  color: #8d6331;
 }
